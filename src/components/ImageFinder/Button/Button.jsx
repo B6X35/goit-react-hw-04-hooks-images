@@ -1,5 +1,4 @@
 import style from './Button.module.css'
-import {memo} from "react";
 import PropTypes from "prop-types"; 
 
 const Button = ({onLoadMore}) => {
@@ -8,7 +7,7 @@ const Button = ({onLoadMore}) => {
     )
 }
 
-export default memo(Button);
+export default Button;
 
 Button.propTypes = {
     onLoadMore: PropTypes.func.isRequired,
