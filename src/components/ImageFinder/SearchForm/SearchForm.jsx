@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { initialState } from "./initialState"
 import PropTypes from "prop-types";
 import style from './SearchForm.module.css'
@@ -39,7 +39,7 @@ function SearchForm ({onSubmit}) {
     );
 }
 
-export default SearchForm;
+export default memo(SearchForm);
 
 SearchForm.propType = {
   onSubmit: PropTypes.func.isRequired

@@ -1,3 +1,4 @@
+import {memo} from "react";
 import PropTypes from "prop-types";
 import ImageGalleryItem from './ImageGalleryItem'
 import style from './ImageGallery.module.css'
@@ -9,7 +10,7 @@ const ImageGallery = ({ items, onClick }) => {
   return <ul className={style['image-gallery']}>{elements}</ul>;
 };
 
-export default ImageGallery;
+export default memo(ImageGallery);
 
 ImageGallery.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({

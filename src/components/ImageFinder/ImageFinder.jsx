@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ApiService } from "../../shared/api/api";
 import style from "./ImageFinder.module.css";
 import Loader from "react-loader-spinner";
@@ -21,18 +21,6 @@ const initialState = {
 function ImageFinder() {
   const [state, setState] = useState(initialState);
 
-  // useEffect(() => {
-  //   const { query, items } = state;
-  //   if (query !== query && query) {
-  //     setState({ loading: true, items: [] });
-  //     fetchQuery();
-  // }
-  // if (items.length > 12) {
-  //   window.scrollTo({
-  //     top: document.documentElement.scrollHeight,
-  //     behavior: 'smooth',
-  //   })
-  // }})
 
   useEffect(() => {
     const fetchQuery = async () => {
@@ -55,21 +43,20 @@ function ImageFinder() {
       }
     };
     if (state.query) {
-      // setState({ loading: true, items: [] });
       fetchQuery();
     }
   }, [state.query, state.page]);
 
-  const changeQuery = ({ query }) => {
+  const changeQuery = useCallback(({ query }) => {
     const newState = { ...state, query, page: 1 };
     if (query !== state.query) {
       newState.loading = true;
       state.items.length = 0;
       setState(newState);
     }
-  };
+  }, []);
 
-  const showModal = (id) => {
+  const showModal = useCallback((id) => {
     setState((prevState) => {
       const { items } = prevState;
       const { largeImageURL } = items.find(item => item.id === id);
@@ -77,9 +64,9 @@ function ImageFinder() {
         ...state,
         modalOpen: true,
         largeImageURL,
-      };
-    });
-  };
+      }
+    })
+  }, [state.items]);
 
   const closeModal = () => {
     setState({
