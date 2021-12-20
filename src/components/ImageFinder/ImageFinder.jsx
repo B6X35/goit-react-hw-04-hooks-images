@@ -51,7 +51,6 @@ function ImageFinder() {
     const newState = { ...state, query, page: 1 };
     if (query !== state.query) {
       newState.loading = true;
-      state.items.length = 0;
       setState(newState);
     }
   }, []);
